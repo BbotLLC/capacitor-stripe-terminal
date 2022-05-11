@@ -1,0 +1,1 @@
+{"version":3,"file":"plugin-registration.js","sourceRoot":"","sources":["../../src/plugin-registration.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,iBAAiB,CAAA;AAIhD;;;GAGG;AACH,MAAM,CAAC,MAAM,cAAc,GAAG,cAAc,CAC1C,gBAAgB,EAChB;IACE,GAAG,EAAE,GAAG,EAAE,CAAC,MAAM,CAAC,OAAO,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,EAAE,CAAC,IAAI,CAAC,CAAC,iBAAiB,EAAE,CAAC;CAChE,CACF,CAAA"}
