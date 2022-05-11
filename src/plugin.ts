@@ -8,6 +8,7 @@ import {
   DiscoveryMethod,
   InternetConnectionConfiguration,
   BluetoothConnectionConfiguration,
+  UsbConnectionConfiguration,
   Reader,
   ConnectionStatus,
   PaymentStatus,
@@ -421,7 +422,7 @@ export class StripeTerminalPlugin {
 
   public async connectUsbReader(
     reader: Reader,
-    config: BluetoothConnectionConfiguration
+    config: UsbConnectionConfiguration
   ): Promise<Reader> {
     this.ensureInitialized()
 

@@ -319,6 +319,15 @@ export class StripeTerminalWeb
     return { reader: null }
   }
 
+  async connectUsbReader(_config: {
+    serialNumber: string
+    locationId: string
+  }): Promise<{ reader: Reader }> {
+    // no equivalent
+    console.warn('connectUsbReader is only available for on iOS and Android.')
+    return { reader: null }
+  }
+
   async getConnectedReader(): Promise<{ reader: Reader }> {
     const reader = this.instance.getConnectedReader()
 

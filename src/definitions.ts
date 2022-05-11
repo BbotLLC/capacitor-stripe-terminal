@@ -128,8 +128,7 @@ export enum DiscoveryMethod {
    */
   Internet,
 
-
-  USB,
+  USBScan,
   /**
    * Use both BluetoothScan and Internet discovery methods
    *
@@ -244,6 +243,19 @@ export interface DiscoveryConfiguration {
  * @category Reader
  */
 export interface BluetoothConnectionConfiguration {
+  /**
+   * The ID of the [Location](https://stripe.com/docs/api/terminal/locations) which the reader should be registered to during connection.
+   *
+   * If the provided ID matches the location the reader is already registered to, the location will not be changed.
+   *
+   * When connecting to a simulated reader, pass in the reader's pre-existing mock location. You can find the mock location ID on the reader object, on the `locationId` property.
+   *
+   * @see https://stripe.com/docs/terminal/readers/fleet-management#bbpos-wisepad3-discovery
+   */
+  locationId: string
+}
+
+export interface UsbConnectionConfiguration {
   /**
    * The ID of the [Location](https://stripe.com/docs/api/terminal/locations) which the reader should be registered to during connection.
    *
@@ -700,7 +712,8 @@ export enum SimulateReaderUpdate {
 
 export enum DeviceStyle {
   Internet,
-  Bluetooth
+  Bluetooth,
+  USB
 }
 
 /**
@@ -721,6 +734,11 @@ export interface StripeTerminalInterface {
   cancelDiscoverReaders(): Promise<void>
 
   connectBluetoothReader(options: {
+    serialNumber: string
+    locationId: string
+  }): Promise<{ reader: Reader }>
+
+  connectUsbReader(options: {
     serialNumber: string
     locationId: string
   }): Promise<{ reader: Reader }>
