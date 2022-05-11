@@ -29,6 +29,7 @@ import com.stripe.stripeterminal.external.models.Cart;
 import com.stripe.stripeterminal.external.models.CartLineItem;
 import com.stripe.stripeterminal.external.models.ConnectionConfiguration.BluetoothConnectionConfiguration;
 import com.stripe.stripeterminal.external.models.ConnectionConfiguration.InternetConnectionConfiguration;
+import com.stripe.stripeterminal.external.models.ConnectionConfiguration.UsbConnectionConfiguration;
 import com.stripe.stripeterminal.external.models.ConnectionStatus;
 import com.stripe.stripeterminal.external.models.ConnectionTokenException;
 import com.stripe.stripeterminal.external.models.DiscoveryConfiguration;
@@ -397,6 +398,47 @@ public class StripeTerminal
           }
         }
       );
+  }
+
+  @PluginMethod
+  public void connectUsbReader(final PluginCall call) {
+    Reader reader = getReaderFromDiscovered(call);
+
+    if (reader == null) {
+      return;
+    }
+
+    String locationId = call.getString("locationId");
+
+    if (locationId == null) {
+      call.reject("Must provide a location ID");
+      return;
+    }
+
+    UsbConnectionConfiguration connectionConfig = new UsbConnectionConfiguration(
+      locationId
+    );
+
+    Terminal
+            .getInstance()
+            .connectUsbReader(
+                    reader,
+                    connectionConfig,
+                    this,
+                    new ReaderCallback() {
+                      @Override
+                      public void onSuccess(@NonNull Reader reader) {
+                        JSObject ret = new JSObject();
+                        ret.put("reader", TerminalUtils.serializeReader(reader));
+                        call.resolve(ret);
+                      }
+
+                      @Override
+                      public void onFailure(@NonNull TerminalException e) {
+                        call.reject(e.getErrorMessage(), e);
+                      }
+                    }
+            );
   }
 
   @PluginMethod

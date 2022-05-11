@@ -174,6 +174,8 @@ public class TerminalUtils {
       return DiscoveryMethod.BLUETOOTH_SCAN;
     } else if (method == 2) {
       return DiscoveryMethod.INTERNET;
+    } else if (method == 3) {
+      return DiscoveryMethod.USB;
     } else {
       return DiscoveryMethod.BLUETOOTH_SCAN;
     }

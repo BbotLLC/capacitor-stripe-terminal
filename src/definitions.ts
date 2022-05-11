@@ -128,6 +128,8 @@ export enum DiscoveryMethod {
    */
   Internet,
 
+
+  USB,
   /**
    * Use both BluetoothScan and Internet discovery methods
    *

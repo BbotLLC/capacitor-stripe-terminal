@@ -419,6 +419,23 @@ export class StripeTerminalPlugin {
     return this.objectExists(data?.reader)
   }
 
+  public async connectUsbReader(
+    reader: Reader,
+    config: BluetoothConnectionConfiguration
+  ): Promise<Reader> {
+    this.ensureInitialized()
+
+    // if connecting to an Bluetooth reader, make sure to switch to the native SDK
+    this.selectedSdkType = 'native'
+
+    const data = await this.sdk.connectUsbReader({
+      serialNumber: reader.serialNumber,
+      locationId: config.locationId
+    })
+
+    return this.objectExists(data?.reader)
+  }
+
   public async connectInternetReader(
     reader: Reader,
     config?: InternetConnectionConfiguration
