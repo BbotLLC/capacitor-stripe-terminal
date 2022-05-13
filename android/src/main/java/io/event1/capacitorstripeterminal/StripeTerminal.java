@@ -24,6 +24,7 @@ import com.stripe.stripeterminal.external.callable.LocationListCallback;
 import com.stripe.stripeterminal.external.callable.PaymentIntentCallback;
 import com.stripe.stripeterminal.external.callable.ReaderCallback;
 import com.stripe.stripeterminal.external.callable.TerminalListener;
+import com.stripe.stripeterminal.external.callable.UsbReaderListener;
 import com.stripe.stripeterminal.external.models.BatteryStatus;
 import com.stripe.stripeterminal.external.models.Cart;
 import com.stripe.stripeterminal.external.models.CartLineItem;
@@ -76,6 +77,7 @@ public class StripeTerminal
     ConnectionTokenProvider,
     TerminalListener,
     DiscoveryListener,
+    UsbReaderListener,
     BluetoothReaderListener {
 
   Cancelable pendingDiscoverReaders = null;
@@ -420,25 +422,25 @@ public class StripeTerminal
     );
 
     Terminal
-            .getInstance()
-            .connectUsbReader(
-                    reader,
-                    connectionConfig,
-                    this,
-                    new ReaderCallback() {
-                      @Override
-                      public void onSuccess(@NonNull Reader reader) {
-                        JSObject ret = new JSObject();
-                        ret.put("reader", TerminalUtils.serializeReader(reader));
-                        call.resolve(ret);
-                      }
+      .getInstance()
+      .connectUsbReader(
+        reader,
+        connectionConfig,
+        this,
+        new ReaderCallback() {
+          @Override
+          public void onSuccess(@NonNull Reader reader) {
+            JSObject ret = new JSObject();
+            ret.put("reader", TerminalUtils.serializeReader(reader));
+            call.resolve(ret);
+          }
 
-                      @Override
-                      public void onFailure(@NonNull TerminalException e) {
-                        call.reject(e.getErrorMessage(), e);
-                      }
-                    }
-            );
+          @Override
+          public void onFailure(@NonNull TerminalException e) {
+            call.reject(e.getErrorMessage(), e);
+          }
+        }
+      );
   }
 
   @PluginMethod

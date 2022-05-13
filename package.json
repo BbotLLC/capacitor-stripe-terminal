@@ -1,6 +1,6 @@
 {
   "name": "capacitor-stripe-terminal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Capacitor plugin for Stripe Terminal (credit card readers).",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -16,8 +16,8 @@
   "author": "eventOne Labs <opensource@event1.io>",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "^3.2.3",
-    "@stripe/terminal-js": "^0.9.0",
+    "@capacitor/core": "^3.5.1",
+    "@stripe/terminal-js": "^0.10.0",
     "rxjs": "^6.6.7"
   },
   "devDependencies": {
