@@ -16,8 +16,8 @@
   "author": "eventOne Labs <opensource@event1.io>",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "3.4.0",
-    "@stripe/terminal-js": "0.8.0",
+    "@capacitor/core": "^3.4.0",
+    "@stripe/terminal-js": "^0.8.0",
     "rxjs": "^6.6.7"
   },
   "devDependencies": {
