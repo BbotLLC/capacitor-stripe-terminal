@@ -1,24 +1,24 @@
 import { PluginListenerHandle } from '@capacitor/core'
 import { Observable } from 'rxjs'
 import {
-  StripeTerminalConfig,
+  BluetoothConnectionConfiguration,
+  Cart,
+  ConnectionStatus,
+  DeviceStyle,
+  DeviceType,
   DiscoveryConfiguration,
   InternetConnectionConfiguration,
-  BluetoothConnectionConfiguration,
-  UsbConnectionConfiguration,
-  Reader,
-  ConnectionStatus,
+  ListLocationsParameters,
+  PaymentIntent,
   PaymentStatus,
+  PermissionStatus,
+  Reader,
   ReaderDisplayMessage,
   ReaderInputOptions,
-  PaymentIntent,
-  Cart,
-  ListLocationsParameters,
+  ReaderSoftwareUpdate,
   SimulatorConfiguration,
-  DeviceType,
-  DeviceStyle,
-  PermissionStatus,
-  ReaderSoftwareUpdate
+  StripeTerminalConfig,
+  UsbConnectionConfiguration
 } from './definitions'
 export declare class StripeTerminalPlugin {
   isInitialized: boolean

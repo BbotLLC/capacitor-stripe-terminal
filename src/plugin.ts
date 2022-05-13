@@ -2,27 +2,27 @@ import { Capacitor, PluginListenerHandle } from '@capacitor/core'
 import { Observable } from 'rxjs'
 
 import {
-  StripeTerminalInterface,
-  StripeTerminalConfig,
+  BluetoothConnectionConfiguration,
+  Cart,
+  ConnectionStatus,
+  DeviceStyle,
+  DeviceType,
   DiscoveryConfiguration,
   DiscoveryMethod,
   InternetConnectionConfiguration,
-  BluetoothConnectionConfiguration,
-  UsbConnectionConfiguration,
-  Reader,
-  ConnectionStatus,
+  ListLocationsParameters,
+  PaymentIntent,
   PaymentStatus,
+  PermissionStatus,
+  Reader,
   ReaderDisplayMessage,
   ReaderInputOptions,
-  PaymentIntent,
-  Cart,
-  ListLocationsParameters,
+  ReaderSoftwareUpdate,
   SimulatedCardType,
   SimulatorConfiguration,
-  DeviceType,
-  DeviceStyle,
-  PermissionStatus,
-  ReaderSoftwareUpdate
+  StripeTerminalConfig,
+  StripeTerminalInterface,
+  UsbConnectionConfiguration
 } from './definitions'
 
 import { StripeTerminal } from './plugin-registration'
@@ -730,17 +730,15 @@ export class StripeTerminalPlugin {
   }
 
   public getDeviceStyleFromDeviceType(type: DeviceType): DeviceStyle {
-    if (
-      type === DeviceType.Chipper2X ||
-      type === DeviceType.StripeM2 ||
-      type === DeviceType.WisePad3
-    ) {
+    if (type === DeviceType.Chipper2X || type === DeviceType.WisePad3) {
       return DeviceStyle.Bluetooth
     } else if (
       type === DeviceType.WisePosE ||
       type === DeviceType.VerifoneP400
     ) {
       return DeviceStyle.Internet
+    } else if (type === DeviceType.StripeM2) {
+      return DeviceStyle.USB
     }
 
     return DeviceStyle.Internet

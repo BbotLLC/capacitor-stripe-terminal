@@ -1,11 +1,11 @@
 import { Capacitor } from '@capacitor/core'
 import { Observable } from 'rxjs'
 import {
-  DiscoveryMethod,
   ConnectionStatus,
-  SimulatedCardType,
+  DeviceStyle,
   DeviceType,
-  DeviceStyle
+  DiscoveryMethod,
+  SimulatedCardType
 } from './definitions'
 import { StripeTerminal } from './plugin-registration'
 import { StripeTerminalWeb } from './web'
@@ -607,17 +607,15 @@ export class StripeTerminalPlugin {
     return this.objectExists(newConfig)
   }
   getDeviceStyleFromDeviceType(type) {
-    if (
-      type === DeviceType.Chipper2X ||
-      type === DeviceType.StripeM2 ||
-      type === DeviceType.WisePad3
-    ) {
+    if (type === DeviceType.Chipper2X || type === DeviceType.WisePad3) {
       return DeviceStyle.Bluetooth
     } else if (
       type === DeviceType.WisePosE ||
       type === DeviceType.VerifoneP400
     ) {
       return DeviceStyle.Internet
+    } else if (type === DeviceType.StripeM2) {
+      return DeviceStyle.USB
     }
     return DeviceStyle.Internet
   }
